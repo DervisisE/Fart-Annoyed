@@ -21,11 +21,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	b(Vec2(20.0f, 20.0f), Colors::Red)
+	brick(Vec2(20.0f, 20.0f), Colors::Red),
+	ball(Vec2(400.0f,300.0f))
 {
 }
 
@@ -39,9 +41,12 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
+	ball.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
-	b.Draw(gfx);
+	ball.Draw(gfx);
+	//brick.Draw(gfx);
 }
