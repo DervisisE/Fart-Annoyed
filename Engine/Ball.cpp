@@ -21,7 +21,6 @@ void Ball::Update(float dt)
 	{
 		old_center += vel * dt;
 		center = old_center;
-		UpdateRect();
 	}
 	UpdateRect();
 	
@@ -31,27 +30,28 @@ void Ball::Update(float dt)
 bool Ball::IsWallColliding( )
 {
 	UpdateRect();
-	if (rect.IsOverlappingWith(RectF({ -20.0f,-20.0f }, 20.0f, 640.0f))) //mporei k na fygei na paei volta
+	bool isColliding = false;
+	if (rect.IsOverlappingWith(RectF({ -40.0f,-40.0f }, 40.0f, 680.0f))) //mporei k na fygei na paei volta
 	{
 		BounceX();
-		return true;
+		isColliding=true;
 	}
-	else if(rect.IsOverlappingWith(RectF({ 800.0f,00.0f }, 20, 600.0f)))
+	else if(rect.IsOverlappingWith(RectF({ 800.0f,-40.0f }, 40.0f, 680.0f)))
 	{
 		BounceX();
-		return true;
+		isColliding = true;
 	}
-	if (rect.IsOverlappingWith(RectF({ -20.0f,-20.0f }, 840.0f, 20.0f ))) //mporei k na fygei na paei volta
+	if (rect.IsOverlappingWith(RectF({ -40.0f,-40.0f }, 880.0f, 40.0f ))) //mporei k na fygei na paei volta
 	{
 		BounceY();
-		return true;
+		isColliding = true;
 	}
-	else if (rect.IsOverlappingWith(RectF({ 00.0f,600.0f }, 800.0f,20 )))
+	else if (rect.IsOverlappingWith(RectF({ -40.0f,600.0f }, 880.0f,40.0f )))
 	{
 		BounceY();
-		return true;
+		isColliding = true;
 	}
-	return false;
+	return isColliding;
 
 }
 
