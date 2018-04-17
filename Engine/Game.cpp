@@ -27,7 +27,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	brick(Vec2(20.0f, 20.0f), Colors::Red),
-	ball(Vec2(400.0f,300.0f))
+	ball(Vec2(400.0f,300.0f)),
+	paddle(Vec2(400.0f,520.0f))
 {
 }
 
@@ -43,10 +44,13 @@ void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
 	ball.Update(dt);
+	paddle.Update(wnd.kbd, dt);
 }
 
 void Game::ComposeFrame()
 {
 	ball.Draw(gfx);
 	//brick.Draw(gfx);
+	paddle.Draw(gfx);
+		
 }

@@ -28,6 +28,7 @@
 #include "SpriteCodex.h"
 #include "Ball.h"
 #include "FrameTimer.h"
+#include "Paddle.h"
 
 class Game
 {
@@ -50,5 +51,6 @@ private:
 	FrameTimer ft;
 	Brick brick;
 	Ball ball;
+	Paddle paddle;
 	/********************************/
 };

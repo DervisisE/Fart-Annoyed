@@ -4,7 +4,7 @@
 Ball::Ball(Vec2 & center)
 {
 	this->center = center;
-	rect = { center.x - r,center.x + r,center.y - r,center.y + r };
+	UpdateRect();
 }
 
 void Ball::Draw(Graphics & gfx)
@@ -15,7 +15,7 @@ void Ball::Draw(Graphics & gfx)
 void Ball::Update(float dt)
 {
 	
-	Vec2 old_center = center;//
+	Vec2 old_center = center;
 	center+= (vel * dt);
 	if (IsWallColliding())
 	{
