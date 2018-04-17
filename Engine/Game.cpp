@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	b(Vec2(20.0f, 20.0f), Colors::Red)
 {
 }
 
@@ -42,4 +43,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	b.Draw(gfx);
 }
