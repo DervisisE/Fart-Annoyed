@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "SpriteCodex.h"
+#include <math.h>
 
 Ball::Ball(Vec2 & center)
 {
@@ -12,12 +13,22 @@ void Ball::Draw(Graphics & gfx)
 	SpriteCodex::DrawBall(center, gfx);
 }
 
-void Ball::Update(float dt)
+void Ball::Update(RectF& other,float dt)
 {
 	
 	Vec2 old_center = center;
 	center+= (vel * dt);
 	if (IsWallColliding())
+	{
+		old_center += vel * dt;
+		center = old_center;
+	}
+	UpdateRect();
+
+	
+	
+	 
+	if (IsColliding(other, false))
 	{
 		old_center += vel * dt;
 		center = old_center;
@@ -63,6 +74,30 @@ void Ball::BounceX()
 void Ball::BounceY()
 {
 	vel.y *= -1.0f;
+}
+
+bool Ball::IsColliding(RectF & otherRect,bool hasChangedVel)
+{
+	UpdateRect();
+	if (rect.IsOverlappingWith(otherRect))
+	{
+		Vec2 otherCenter = { (otherRect.left + otherRect.right) / 2.0f,(otherRect.top + otherRect.bottom) / 2.0f };
+		Vec2 c2c = otherCenter - center;
+		c2c.Normalize();
+		if (abs(c2c.x)>0.707168 && !hasChangedVel)
+		{
+			BounceX();
+		}
+		else if (abs(c2c.y)>0.707168 && !hasChangedVel)
+		{
+			BounceY();
+		}//GWNIESS
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Ball::UpdateRect()

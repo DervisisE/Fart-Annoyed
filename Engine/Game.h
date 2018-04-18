@@ -49,7 +49,9 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Brick brick;
+	static constexpr int bricksAcross = 18;
+	static constexpr int bricksDown = 10;
+	Brick bricks[bricksAcross*bricksDown];
 	Ball ball;
 	Paddle paddle;
 	/********************************/

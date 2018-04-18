@@ -26,10 +26,21 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	brick(Vec2(20.0f, 20.0f), Colors::Red),
+	//brick4(Vec2(300.0f, 10.0f), Colors::Red),
 	ball(Vec2(400.0f,300.0f)),
 	paddle(Vec2(400.0f,520.0f))
 {
+	Vec2 origin = { 20.0f,20.0f };
+	int i = 0;
+	for (int y = 0; y < bricksDown; ++y)
+	{
+		for (int x = 0; x < bricksAcross; ++x)
+		{
+			bricks[i] = Brick(Vec2(origin.x + x * (41.0f), origin.y + y * (25.0f)), Colors::Red);
+			i++;
+		}
+				
+	}
 }
 
 void Game::Go()
@@ -43,14 +54,41 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
-	ball.Update(dt);
+	ball.Update(paddle.rect,dt);
 	paddle.Update(wnd.kbd, dt);
+	bool hasChangedVel = false;
+	for (Brick& b : bricks)
+	{
+		if (!b.destroyed)
+		{
+			b.destroyed = ball.IsColliding(b.rect,hasChangedVel);
+			if (b.destroyed)
+			{
+				hasChangedVel = true;
+			}
+		}
+	}
+	/*if (!brick4.destroyed)
+	{
+		brick4.destroyed = ball.IsColliding(brick4.rect);
+	}*/
 }
 
 void Game::ComposeFrame()
 {
 	ball.Draw(gfx);
-	//brick.Draw(gfx);
+	for (Brick& b: bricks)
+	{
+		if (!b.destroyed)
+		{
+			b.Draw(gfx);
+		}
+	}
+	
+	/*if (!brick4.destroyed)
+	{
+		brick4.Draw(gfx);
+	}*/
 	paddle.Draw(gfx);
 		
 }

@@ -9,13 +9,15 @@ class Ball
 public:
 	Ball(Vec2& center);
 	void Draw(Graphics& gfx);
-	void Update(float dt);
+
+	void Update(RectF& other, float dt);
 	bool IsWallColliding();
 	void BounceX();
 	void BounceY();
+	bool IsColliding(RectF& otherRect,bool hasChangedVel);
 private:
 	RectF rect;
-	Vec2 vel = { 300.0f, 300.0f };
+	Vec2 vel = { 100.0f, 100.0f };
 	Vec2 center;
 	static constexpr float r{ 7.0f };
 	//Color c;

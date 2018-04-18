@@ -15,12 +15,11 @@ public:
 	void Update(Keyboard& kbd, float dt);
 	void UpdateRect();
 	bool IsWallColliding();
-
+    RectF rect;
 
 private:
 	static constexpr Color c = Colors::White;
-	RectF rect;
-	static constexpr float width{ 80.0f };
+	static constexpr float width{ 200.0f };
 	static constexpr float height{ 30.0f };
 	Vec2 center;
 	float vel =500.0f;
