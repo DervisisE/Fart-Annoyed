@@ -39,7 +39,7 @@ public:
 	void Go();
 private:
 	void ComposeFrame();
-	void UpdateModel();
+	void UpdateModel(float dt);
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -49,8 +49,8 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	static constexpr int bricksAcross = 18;
-	static constexpr int bricksDown = 10;
+	static constexpr int bricksAcross = 36;
+	static constexpr int bricksDown = 8;
 	Brick bricks[bricksAcross*bricksDown];
 	Ball ball;
 	Paddle paddle;

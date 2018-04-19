@@ -34,7 +34,7 @@ void Paddle::UpdateRect()
 
 bool Paddle::IsWallColliding()
 {
-	if (rect.IsOverlappingWith(RectF({ -40.0f,-40.0f }, 40.0f, 680.0f))) //mporei k na fygei na paei volta
+	if (rect.IsOverlappingWith(RectF({ -40.0f,-40.0f }, 40.0f, 680.0f))) 
 	{
 		center.x = width / 2.0f;
 		UpdateRect();

@@ -13,8 +13,8 @@ public:
 	bool destroyed = false;
 private:
 	
-	static constexpr float width{ 40.0f };
-	static constexpr float height{ 24.0f };
+	static constexpr float width{ 20.0f };
+	static constexpr float height{ 48.0f };
 	Color c;
 	
 };

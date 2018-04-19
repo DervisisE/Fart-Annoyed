@@ -24,18 +24,6 @@ void Ball::Update(RectF& other,float dt)
 		center = old_center;
 	}
 	UpdateRect();
-
-	
-	
-	 
-	if (IsColliding(other, false))
-	{
-		old_center += vel * dt;
-		center = old_center;
-	}
-	UpdateRect();
-	
-
 }
 
 bool Ball::IsWallColliding( )
@@ -83,15 +71,35 @@ bool Ball::IsColliding(RectF & otherRect,bool hasChangedVel)
 	{
 		Vec2 otherCenter = { (otherRect.left + otherRect.right) / 2.0f,(otherRect.top + otherRect.bottom) / 2.0f };
 		Vec2 c2c = otherCenter - center;
+		float percentageX = 1.0f;
+		float percentageY = 1.0f;
+		if (abs(c2c.x)>(otherRect.right - otherRect.left) / 2.0f)
+		{
+			//percentageX = abs(c2c.x) / ((otherRect.left - otherRect.right) / 2.0f);
+			percentageX = c2c.x - ((otherRect.right - otherRect.left) / 2.0f);
+		}
+		if (abs(c2c.y)>(otherRect.bottom - otherRect.top) / 2.0f)
+		{
+			//percentageY = abs(c2c.y) / ((otherRect.bottom - otherRect.top) / 2.0f);
+			percentageY = c2c.y - ((otherRect.bottom - otherRect.top) / 2.0f);
+		}
+		//c2c.x -= percentageX;
+		//c2c.y -= percentageY;
+		c2c.x /= ((otherRect.right - otherRect.left) / 2.0f);
+		c2c.y /= ((otherRect.bottom - otherRect.top) / 2.0f);
 		c2c.Normalize();
-		if (abs(c2c.x)>0.707168 && !hasChangedVel)
+		if (abs(c2c.x)>0.70710678f && !hasChangedVel)
 		{
 			BounceX();
 		}
-		else if (abs(c2c.y)>0.707168 && !hasChangedVel)
+		else if (abs(c2c.y)>0.70710678f && !hasChangedVel)
 		{
 			BounceY();
-		}//GWNIESS
+		}
+		else if (!hasChangedVel)
+		{
+			BounceX(); BounceY();
+		}
 		return true;
 	}
 	else
@@ -99,6 +107,7 @@ bool Ball::IsColliding(RectF & otherRect,bool hasChangedVel)
 		return false;
 	}
 }
+
 
 void Ball::UpdateRect()
 {
