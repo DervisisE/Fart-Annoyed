@@ -26,16 +26,16 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	ball(Vec2(200.0f,30.0f)),
+	ball(Vec2(400.0f,300.0f)),
 	paddle(Vec2(400.0f,530.0f))
 {
-	Vec2 origin = { 30.0f,50.0f };
+	Vec2 origin = { 20.0f,20.0f };
 	int i = 0;
 	for (int y = 0; y < bricksDown; ++y)
 	{
 		for (int x = 0; x < bricksAcross; ++x)
 		{
-			bricks[i] = Brick(Vec2(origin.x + x * (21.0f), origin.y + y * (49.0f)), Colors::Red);
+			bricks[i] = Brick(Vec2(origin.x + x * (81.0f), origin.y + y * (25.0f)), Colors::Red);
 			i++;
 		}
 				

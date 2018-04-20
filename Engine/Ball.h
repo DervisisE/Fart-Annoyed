@@ -17,7 +17,7 @@ public:
 	bool IsColliding(RectF& otherRect,bool hasChangedVel);
 private:
 	RectF rect;
-	Vec2 vel = { 50.0f, 50.0f };
+	Vec2 vel = { 1000.0f, 1000.0f };
 	Vec2 center;
 	static constexpr float r{ 7.0f };
 	//Color c;
