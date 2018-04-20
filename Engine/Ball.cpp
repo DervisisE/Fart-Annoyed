@@ -73,18 +73,23 @@ bool Ball::IsColliding(RectF & otherRect,bool hasChangedVel)
 		Vec2 c2c = otherCenter - center;
 		float percentageX = 1.0f;
 		float percentageY = 1.0f;
-		if (abs(c2c.x)>(otherRect.right - otherRect.left) / 2.0f)
+		/*if (abs(c2c.x)>(otherRect.right - otherRect.left) / 2.0f)
 		{
-			//percentageX = abs(c2c.x) / ((otherRect.left - otherRect.right) / 2.0f);
-			percentageX = c2c.x - ((otherRect.right - otherRect.left) / 2.0f);
+			percentageX = abs(c2c.x) - ((otherRect.right - otherRect.left) / 2.0f);
+			//percentageX = c2c.x - ((otherRect. - otherRect.) / 2.0f);
 		}
 		if (abs(c2c.y)>(otherRect.bottom - otherRect.top) / 2.0f)
 		{
-			//percentageY = abs(c2c.y) / ((otherRect.bottom - otherRect.top) / 2.0f);
-			percentageY = c2c.y - ((otherRect.bottom - otherRect.top) / 2.0f);
-		}
+			percentageY = abs(c2c.y)  - ((otherRect.bottom - otherRect.top) / 2.0f);
+			//percentageY = c2c.y - ((otherRect.bottom - otherRect.top) / 2.0f);
+		}*/
+
 		//c2c.x -= percentageX;
 		//c2c.y -= percentageY;
+		if (((abs(c2c.x) - (otherRect.right - otherRect.left) / 2.0f) + (abs(c2c.y) - (otherRect.bottom - otherRect.top) / 2.0f))>r)
+		{
+			return false;
+		}
 		c2c.x /= ((otherRect.right - otherRect.left) / 2.0f);
 		c2c.y /= ((otherRect.bottom - otherRect.top) / 2.0f);
 		c2c.Normalize();
@@ -100,7 +105,7 @@ bool Ball::IsColliding(RectF & otherRect,bool hasChangedVel)
 		{
 			BounceX(); BounceY();
 		}
-		return true;
+		
 	}
 	else
 	{
